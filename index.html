@@ -1,0 +1,303 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sur Analytics</title>
+<meta name="description" content="Laboratorios abiertos de datos para hidrocarburos y minería: el código, los datos públicos y los límites a la vista, para abrir en el navegador.">
+<meta property="og:title" content="Sur Analytics">
+<meta property="og:description" content="Laboratorios abiertos de datos para hidrocarburos y minería, para abrir en el navegador.">
+<meta property="og:image" content="https://dpinero14.github.io/img/arena3d.jpg">
+<meta property="og:url" content="https://dpinero14.github.io/">
+<meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%230e1b25'/><path d='M12 72 L38 40 L58 58 L88 22' stroke='%23f2b134' stroke-width='10' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{
+  --bg:#0e1b25; --card:#132633; --card2:#162c3b; --ink:#e9eff3; --muted:#8ea2af;
+  --accent:#f2b134; --pipe:#26c6da; --rule:#22384a;
+  --sans:"IBM Plex Sans",Segoe UI,system-ui,sans-serif; --mono:"IBM Plex Mono",Consolas,monospace;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;
+     font-variant-numeric:tabular-nums;-webkit-font-smoothing:antialiased}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+a:focus-visible,button:focus-visible{outline:2px solid var(--pipe);outline-offset:3px;border-radius:2px}
+img{display:block;max-width:100%}
+.wrap{width:min(1120px,100% - 32px);margin-inline:auto}
+
+header{border-bottom:1px solid var(--rule)}
+.bar{display:flex;align-items:baseline;justify-content:space-between;gap:16px;padding:18px 0;flex-wrap:wrap}
+.brand{font-weight:600;letter-spacing:-.01em;font-size:19px}
+.brand span{color:var(--accent)}
+.bar nav{display:flex;gap:20px;font-size:15px;color:var(--muted)}
+.bar nav a{color:var(--muted)}
+
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:40px;align-items:center;padding:56px 0 48px}
+.eyebrow{font-family:var(--mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+h1{font-size:clamp(30px,4.4vw,46px);line-height:1.1;margin:12px 0 0;font-weight:600;letter-spacing:-.02em;text-wrap:balance}
+.lead{color:var(--muted);font-size:19px;margin-top:16px;max-width:52ch}
+.lead strong{color:var(--ink);font-weight:500}
+.shot{border:1px solid var(--rule);border-radius:3px;overflow:hidden;background:#000}
+.shot figcaption{font-size:13px;color:var(--muted);padding:10px 14px;border-top:1px solid var(--rule);background:var(--card)}
+
+.btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
+.btn{display:inline-block;padding:10px 16px;border:1px solid var(--accent);color:var(--accent);
+     font-size:15px;font-weight:500;border-radius:2px}
+.btn:hover{background:var(--accent);color:#0e1b25;text-decoration:none}
+.btn.ghost{border-color:var(--rule);color:var(--muted)}
+.btn.ghost:hover{background:var(--card2);color:var(--ink);border-color:var(--muted)}
+
+section{padding:52px 0;border-top:1px solid var(--rule)}
+h2{font-size:24px;font-weight:600;margin:0 0 6px;letter-spacing:-.01em}
+.sub{color:var(--muted);margin:0 0 28px;max-width:62ch}
+
+.labs{display:grid;grid-template-columns:repeat(auto-fill,minmax(330px,1fr));gap:20px}
+.lab{display:flex;flex-direction:column;background:var(--card);border:1px solid var(--rule);border-radius:3px;overflow:hidden}
+.lab img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;background:#0b141c}
+/* el último laboratorio, el más reciente, cierra la grilla a lo ancho */
+.lab.wide{grid-column:1/-1;flex-direction:row;align-items:stretch}
+.lab.wide img{width:52%;height:auto;aspect-ratio:16/9;object-fit:cover;object-position:center}
+.lab.wide .body{justify-content:center;gap:12px;padding:26px 30px}
+.lab.wide h3{font-size:22px}
+.lab.wide p{font-size:16.5px;max-width:56ch}
+.lab .body{padding:18px 20px 20px;display:flex;flex-direction:column;gap:10px;flex:1}
+.lab .num{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.08em}
+.lab .num b{color:var(--accent);font-weight:500}
+.lab h3{margin:0;font-size:19px;font-weight:600;letter-spacing:-.01em}
+.lab p{margin:0;color:var(--muted);font-size:15.5px}
+.lab .links{margin-top:auto;padding-top:6px;display:flex;flex-wrap:wrap;gap:14px;font-size:15px}
+.lab .links .repo{color:var(--muted)}
+
+.lista{background:var(--card);border:1px solid var(--rule);border-radius:3px;padding:28px 30px;
+       display:grid;grid-template-columns:1fr minmax(300px,380px);gap:32px;align-items:center}
+.lista h2{margin-bottom:10px}
+.lista p{color:var(--muted);margin:0;max-width:48ch}
+.alta{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.lista iframe{width:100%;height:120px;border:0;background:transparent;color-scheme:light}
+
+.como{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
+.como div{border-left:2px solid var(--pipe);padding-left:16px}
+.como h3{margin:0 0 6px;font-size:16px;font-weight:600}
+.como p{margin:0;color:var(--muted);font-size:15.5px}
+
+footer{border-top:1px solid var(--rule);padding:30px 0 44px;color:var(--muted);font-size:15px}
+footer .cols{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
+
+@media (max-width:860px){
+  .hero{grid-template-columns:1fr;gap:28px;padding:40px 0 36px}
+  .lista{grid-template-columns:1fr;gap:20px}
+}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap bar">
+    <div class="brand">Sur <span>Analytics</span></div>
+    <nav>
+      <a href="#laboratorios">Laboratorios</a>
+      <a href="#lista">Lista de correo</a>
+      <a href="#como">Cómo trabajo</a>
+      <a href="https://github.com/dpinero14">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<div class="wrap hero">
+  <div>
+    <div class="eyebrow">Datos abiertos · Código abierto</div>
+    <h1>Laboratorios para entender la industria por dentro</h1>
+    <p class="lead">Siete proyectos de datos sobre hidrocarburos y minería, hechos con
+    <strong>datos públicos</strong> y publicados con <strong>todo el código a la vista</strong>.
+    No son presentaciones: son laboratorios que se abren en el navegador y se tocan.</p>
+    <div class="btns">
+      <a class="btn" href="#laboratorios">Ver los laboratorios</a>
+      <a class="btn ghost" href="#lista">Avisame cuando salga uno nuevo</a>
+    </div>
+  </div>
+  <figure class="shot" style="margin:0">
+    <img src="img/arena3d.jpg" alt="Vista en tres dimensiones del relieve entre Entre Ríos y Neuquén con la traza de un arenoducto hipotético" width="900" height="506">
+    <figcaption>La ruta de la arena de Vaca Muerta sobre el relieve real, del laboratorio de logística.</figcaption>
+  </figure>
+</div>
+
+<section id="laboratorios">
+  <div class="wrap">
+    <h2>Los laboratorios</h2>
+    <p class="sub">En orden de publicación. Cada uno tiene su repositorio con los notebooks,
+    los tests y los límites declarados; los que tienen página se abren y se recorren sin instalar nada.</p>
+
+    <div class="labs">
+
+      <article class="lab">
+        <img src="img/welllog.jpg" alt="Roca y perfil de pozo mostrados al mismo tiempo" loading="lazy" width="900" height="506">
+        <div class="body">
+          <div class="num"><b>01</b> · La roca</div>
+          <h3>well-log-lab</h3>
+          <p>Qué es un perfil de pozo y qué se puede leer en él, hasta clasificar facies
+          con validación pozo por pozo. Datos de Volve, el campo que Equinor liberó entero.</p>
+          <div class="links">
+            <a href="https://dpinero14.github.io/well-log-lab/roca_y_registro_f1b.html">Abrir: roca y registro →</a>
+            <a class="repo" href="https://github.com/dpinero14/well-log-lab">Repositorio</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="lab">
+        <img src="img/wellpay.jpg" alt="Modelo en tres dimensiones de la saturación de agua en el campo Volve" loading="lazy" width="900" height="506">
+        <div class="body">
+          <div class="num"><b>02</b> · El pozo</div>
+          <h3>well-pay-lab</h3>
+          <p>Saturación de agua y metros que pagan en nueve pozos, medidos contra la
+          interpretación oficial de Equinor, con la incertidumbre de Archie a la vista.</p>
+          <div class="links">
+            <a href="https://dpinero14.github.io/well-pay-lab/volve_so_3d.html">Abrir: saturación en 3D →</a>
+            <a class="repo" href="https://github.com/dpinero14/well-pay-lab">Repositorio</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="lab">
+        <img src="img/vacamuerta.jpg" alt="Curva de retorno marginal de la arena de fractura" loading="lazy" width="900" height="506">
+        <div class="body">
+          <div class="num"><b>03</b> · El campo</div>
+          <h3>vaca-muerta-lab</h3>
+          <p>Qué explica la producción de un pozo no convencional: diseño de fractura
+          contra producción real, con los datos abiertos de la Secretaría de Energía.
+          Dónde deja de rendir la arena que se agrega.</p>
+          <div class="links">
+            <a href="https://github.com/dpinero14/vaca-muerta-lab">Repositorio →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="lab">
+        <img src="img/petrobras.jpg" alt="Señales de presión y temperatura de un pozo con un evento no deseado" loading="lazy" width="900" height="506">
+        <div class="body">
+          <div class="num"><b>04</b> · La operación</div>
+          <h3>oilgas-predictive-maintenance</h3>
+          <p>Detección de eventos no deseados en pozos con el 3W Dataset de Petrobras:
+          inestabilidad de flujo, validada pozo por pozo y no por fila, que es donde
+          casi todos los modelos se engañan solos.</p>
+          <div class="links">
+            <a href="https://github.com/dpinero14/oilgas-predictive-maintenance">Repositorio →</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="lab">
+        <img src="img/reservoir.jpg" alt="Modelo tridimensional de la roca del reservorio de Volve" loading="lazy" width="900" height="506">
+        <div class="body">
+          <div class="num"><b>05</b> · El reservorio</div>
+          <h3>reservoir-lab</h3>
+          <p>El modelo estático real de Volve convertido en laboratorio: una roca en 3D
+          que se recorre, el petróleo en sitio contra la cifra oficial y el error de
+          interpretación medido contra la verdad conocida.</p>
+          <div class="links">
+            <a href="https://dpinero14.github.io/reservoir-lab/volve_rock_3d.html">Abrir: la roca en 3D →</a>
+            <a class="repo" href="https://github.com/dpinero14/reservoir-lab">Repositorio</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="lab">
+        <img src="img/placement.jpg" alt="Plan de pozos elegido por un algoritmo genético sobre el modelo de Volve" loading="lazy" width="900" height="506">
+        <div class="body">
+          <div class="num"><b>06</b> · Dónde perforar</div>
+          <h3>well-placement-lab</h3>
+          <p>Un algoritmo genético elige cuántos pozos perforar, dónde y con qué
+          trayectoria sobre el modelo real, con un proxy de drenaje honesto y
+          comparado contra planes simples.</p>
+          <div class="links">
+            <a href="https://dpinero14.github.io/well-placement-lab/plan_3d.html">Abrir: el plan en 3D →</a>
+            <a class="repo" href="https://github.com/dpinero14/well-placement-lab">Repositorio</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="lab wide">
+        <img src="img/ruta.jpg" alt="Mapa animado de las cadenas logísticas de la arena hacia Vaca Muerta" loading="lazy" width="900" height="506">
+        <div class="body">
+          <div class="num"><b>07</b> · La arena</div>
+          <h3>arena-lab</h3>
+          <p>De dónde puede salir la arena de fractura y cuánto cuesta moverla:
+          mapa de prospectividad con la geología de SEGEMAR, la ruta animada año a año
+          y un laboratorio con perillas para comparar camión, tren, río y arenoducto.</p>
+          <div class="links">
+            <a href="https://dpinero14.github.io/arena-lab/laboratorio_arena.html">Abrir: el laboratorio →</a>
+            <a href="https://dpinero14.github.io/arena-lab/ruta_animada.html">La ruta animada</a>
+            <a href="https://dpinero14.github.io/arena-lab/mapa_arena.html">El mapa</a>
+            <a class="repo" href="https://github.com/dpinero14/arena-lab">Repositorio</a>
+          </div>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section id="lista">
+  <div class="wrap">
+    <div class="lista">
+      <div>
+        <h2>Un correo cuando sale un laboratorio nuevo</h2>
+        <p>Eso es todo lo que hace esta lista: te aviso cuándo publico uno y qué se puede
+        abrir adentro. Sin publicidad y sin reenviar tu dirección a nadie. Te podés dar de
+        baja con un clic.</p>
+      </div>
+      <div class="alta">
+        <iframe src="https://suranalytics.substack.com/embed" title="Suscripción al aviso de laboratorios nuevos" loading="lazy" scrolling="no"></iframe>
+        <a class="btn" href="https://suranalytics.substack.com/subscribe">Suscribirme</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="como">
+  <div class="wrap">
+    <h2>Cómo trabajo</h2>
+    <p class="sub">Las mismas cuatro reglas en los siete repositorios.</p>
+    <div class="como">
+      <div>
+        <h3>Datos públicos</h3>
+        <p>Volve de Equinor, la Secretaría de Energía, SEGEMAR, Vialidad, Petrobras.
+        Nada de datos privados ni de mi trabajo: todo lo que uso lo puede bajar cualquiera.</p>
+      </div>
+      <div>
+        <h3>Validación honesta</h3>
+        <p>Por pozo, por área o por grupo, nunca por fila. Es la diferencia entre un
+        modelo que anda y uno que se copió la respuesta.</p>
+      </div>
+      <div>
+        <h3>Límites declarados</h3>
+        <p>Cada repo dice qué no puede hacer y con qué supuestos trabaja. Un mapa dice
+        dónde buscar, no si la arena sirve; eso lo dice el ensayo de laboratorio.</p>
+      </div>
+      <div>
+        <h3>Correcciones con crédito</h3>
+        <p>Cuando alguien del rubro me corrige, lo corrijo y lo cito con nombre en el
+        README. Varios repos tienen su sección «lo que me corrigieron».</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap cols">
+    <div>Diego Piñero · Sur Analytics · Código con licencia MIT</div>
+    <div>
+      <a href="https://github.com/dpinero14">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
