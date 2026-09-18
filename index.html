@@ -77,7 +77,8 @@ h2{font-size:24px;font-weight:600;margin:0 0 6px;letter-spacing:-.01em}
        display:grid;grid-template-columns:1fr minmax(300px,380px);gap:32px;align-items:center}
 .lista h2{margin-bottom:10px}
 .lista p{color:var(--muted);margin:0;max-width:48ch}
-.alta{display:flex;flex-direction:column;align-items:flex-start;gap:12px}
+.alta{display:flex;flex-direction:column;align-items:stretch;gap:10px}
+.alta .pie{font-size:13.5px;color:var(--muted);margin:0;max-width:none}
 .lista iframe{width:100%;height:120px;border:0;background:transparent;color-scheme:light}
 
 .como{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:22px}
@@ -254,7 +255,7 @@ footer .cols{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
       </div>
       <div class="alta">
         <iframe src="https://dpinero14.substack.com/embed" title="Suscripción al aviso de laboratorios nuevos" loading="lazy" scrolling="no"></iframe>
-        <a class="btn" href="https://dpinero14.substack.com/subscribe">Suscribirme</a>
+        <p class="pie">El alta la maneja Substack, y el formulario está en inglés: escribí tu correo y tocá <em>Subscribe</em>.</p>
       </div>
     </div>
   </div>
