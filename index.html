@@ -248,9 +248,11 @@ footer .cols{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
           <p>Cuánto del transporte de cargas argentino vuelve sin carga, tramo por tramo
           y producto por producto, con las matrices origen-destino oficiales. El 43 % de
           los camiones-kilómetro va en el sentido que no tiene vuelta; la arena de
-          fractura es el caso extremo.</p>
+          fractura es el caso extremo. El observatorio lo recalcula solo cada mes con
+          las fuentes que miden por zona.</p>
           <div class="links">
             <a href="https://dpinero14.github.io/vacio-lab/mapa_vacio.html">Abrir: el mapa del vacío →</a>
+            <a href="https://dpinero14.github.io/vacio-lab/observatorio.html">El observatorio, año por año →</a>
             <a class="repo" href="https://github.com/dpinero14/vacio-lab">Repositorio</a>
           </div>
         </div>
@@ -317,5 +319,21 @@ footer .cols{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   </div>
 </footer>
 
+<!-- eventos GA4: clics en los laboratorios y en los enlaces del pie (no depende del ID: usa gtag si está cargado) -->
+<script>
+document.addEventListener('click', function (e) {
+  var a = e.target.closest('a[href]');
+  if (!a || typeof gtag !== 'function') return;
+  var href = a.getAttribute('href') || '';
+  if (href.charAt(0) === '#') return;
+  var card = a.closest('article.lab');
+  var h3 = card && card.querySelector('h3');
+  var lab = h3 ? h3.textContent.trim() : 'landing';
+  var destino = /github\.com/.test(href) ? 'repositorio'
+              : /dpinero14\.github\.io/.test(href) ? 'pagina'
+              : /linkedin\.com/.test(href) ? 'linkedin' : 'otro';
+  gtag('event', 'abrir_laboratorio', { laboratorio: lab, destino: destino, enlace: href, texto: a.textContent.trim() });
+});
+</script>
 </body>
 </html>
