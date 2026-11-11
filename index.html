@@ -43,6 +43,7 @@ h1{font-size:clamp(30px,4.4vw,46px);line-height:1.1;margin:12px 0 0;font-weight:
 .lead{color:var(--muted);font-size:19px;margin-top:16px;max-width:52ch}
 .lead strong{color:var(--ink);font-weight:500}
 .shot{border:1px solid var(--rule);border-radius:3px;overflow:hidden;background:#000}
+.shot video{display:block;width:100%;height:auto}
 .shot figcaption{font-size:13px;color:var(--muted);padding:10px 14px;border-top:1px solid var(--rule);background:var(--card)}
 
 .btns{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}
@@ -136,7 +137,11 @@ footer .cols{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     </div>
   </div>
   <figure class="shot" style="margin:0">
-    <img src="img/portada_locaciones.jpg" alt="Imagen Sentinel-2 de Vaca Muerta con locaciones nuevas marcadas en verde y, en rosa, las que ya tienen pozo en el padrón" width="900" height="506">
+    <video autoplay muted loop playsinline poster="img/portada_locaciones.jpg" width="900" height="506"
+      aria-label="Timelapse Sentinel-2 de Vaca Muerta, 2020 a 2026: el radar barre la imagen, cada locación nueva aparece en verde y, en rosa, cuando el padrón registra su primer pozo">
+      <source src="img/portada_locaciones.mp4" type="video/mp4">
+      <img src="img/portada_locaciones.jpg" alt="Imagen Sentinel-2 de Vaca Muerta con locaciones nuevas marcadas en verde y, en rosa, las que ya tienen pozo en el padrón" width="900" height="506">
+    </video>
     <figcaption>Vaca Muerta desde el satélite: en verde, cada locación nueva que detecta Sentinel-2; en rosa, cuando el padrón registra su primer pozo. Del laboratorio de locaciones.</figcaption>
   </figure>
 </div>
