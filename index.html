@@ -51,6 +51,17 @@ h1{font-size:clamp(30px,4.4vw,46px);line-height:1.1;margin:12px 0 0;font-weight:
 .btn:hover{background:var(--accent);color:#0e1b25;text-decoration:none}
 .btn.ghost{border-color:var(--rule);color:var(--muted)}
 .btn.ghost:hover{background:var(--card2);color:var(--ink);border-color:var(--muted)}
+.btn.wa{display:inline-flex;align-items:center;gap:10px;background:#25d366;border-color:#25d366;color:#07261a;font-weight:600}
+.btn.wa img{width:22px;height:22px}
+.btn.wa:hover{background:#4ae08a;border-color:#4ae08a;color:#07261a}
+nav a.wa{color:#25d366;font-weight:500}
+.canal{display:grid;grid-template-columns:1fr 1fr;gap:40px;align-items:center}
+.canal .nombre{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:#25d366;margin-bottom:8px}
+.canal .btn.wa{font-size:17px;padding:14px 22px;margin-top:8px}
+.canal .btn.wa img{width:26px;height:26px}
+@media(max-width:760px){.canal{grid-template-columns:1fr;gap:24px}
+  .bar nav{flex-wrap:wrap;gap:8px 16px;font-size:14px}
+  .bar nav a[href="#lista"],.bar nav a[href="#como"]{display:none}}
 
 section{padding:52px 0;border-top:1px solid var(--rule)}
 h2{font-size:24px;font-weight:600;margin:0 0 6px;letter-spacing:-.01em}
@@ -104,7 +115,7 @@ footer .cols{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     <nav>
       <a href="#laboratorios">Laboratorios</a>
       <a href="#lista">Lista de correo</a>
-      <a href="https://whatsapp.com/channel/0029VbDhfzIB4hdKBOmHzr0u">Canal de WhatsApp</a>
+      <a class="wa" href="https://whatsapp.com/channel/0029VbDhfzIB4hdKBOmHzr0u">Canal de WhatsApp</a>
       <a href="#como">Cómo trabajo</a>
       <a href="https://github.com/dpinero14">GitHub</a>
     </nav>
@@ -120,8 +131,8 @@ footer .cols{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
     <strong>datos públicos</strong> y publicados con <strong>todo el código a la vista</strong>.
     No son presentaciones: son laboratorios que se abren en el navegador y se tocan.</p>
     <div class="btns">
+      <a class="btn wa" href="https://whatsapp.com/channel/0029VbDhfzIB4hdKBOmHzr0u"><img src="img/whatsapp.png" alt="" width="22" height="22">Sumate al canal de WhatsApp</a>
       <a class="btn" href="#laboratorios">Ver los laboratorios</a>
-      <a class="btn ghost" href="#lista">Avisame cuando salga uno nuevo</a>
     </div>
   </div>
   <figure class="shot" style="margin:0">
@@ -311,12 +322,29 @@ footer .cols{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
   </div>
 </section>
 
+<section id="canal">
+  <div class="wrap">
+    <div class="canal">
+      <div>
+        <div class="nombre">Canal de WhatsApp</div>
+        <h2>Inteligencia Artificial en Energía y Minería</h2>
+        <p>Cada laboratorio nuevo, apenas sale, con el video, el código y los datos para abrirlo.
+        Y lo que va pasando con la IA en petróleo y gas, minería y la industria energética de
+        Argentina y Latinoamérica. Es un canal: no ve tu número ni te escribe nadie.</p>
+      </div>
+      <div>
+        <a class="btn wa" href="https://whatsapp.com/channel/0029VbDhfzIB4hdKBOmHzr0u"><img src="img/whatsapp.png" alt="" width="26" height="26">Sumate al canal</a>
+      </div>
+    </div>
+  </div>
+</section>
+
 <section id="lista">
   <div class="wrap">
     <div class="lista">
       <div>
-        <h2>Un correo cuando sale un laboratorio nuevo</h2>
-        <p>Eso es todo lo que hace esta lista: te aviso cuándo publico uno y qué se puede
+        <h2>Si preferís un correo</h2>
+        <p>Eso es todo lo que hace esta lista: te aviso cuándo publico un laboratorio y qué se puede
         abrir adentro. Sin publicidad y sin reenviar tu dirección a nadie. Te podés dar de
         baja con un clic.</p>
       </div>
@@ -331,7 +359,7 @@ footer .cols{display:flex;justify-content:space-between;gap:20px;flex-wrap:wrap}
 <section id="como">
   <div class="wrap">
     <h2>Cómo trabajo</h2>
-    <p class="sub">Las mismas cuatro reglas en los siete repositorios.</p>
+    <p class="sub">Las mismas cuatro reglas en los once repositorios.</p>
     <div class="como">
       <div>
         <h3>Datos públicos</h3>
